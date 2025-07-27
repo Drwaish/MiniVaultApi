@@ -21,7 +21,8 @@ The MiniVault API is a lightweight local REST API designed to simulate a core Mo
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/Drwaish/MiniVaultApi.git
-   cd minivault-api
+   cd MiniVaultApi
+   cd minivault-api/
    ```
 
 2. **Create a Virtual Environment**
