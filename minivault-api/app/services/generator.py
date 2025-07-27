@@ -7,7 +7,7 @@ class GeneratorService:
         self.model = LocalModel()
 
     def generate_response(self, prompt: str) -> str:
-        response = self.model.generate(prompt)
+        response = self.model.generate_response(prompt)
         return response
 
     def process_request(self, request_data: dict) -> dict:

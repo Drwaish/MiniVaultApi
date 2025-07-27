@@ -2,10 +2,11 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 import json
 from app.utils.logger import log_request_response
-from app.services.generator import generate_response
+from app.services.generator import GeneratorService
 import psutil
 import time
 import platform
+import logging
 
 router = APIRouter()
 
@@ -15,13 +16,15 @@ class GenerateRequest(BaseModel):
 class GenerateResponse(BaseModel):
     response: str
 
+genresp = GeneratorService()
 @router.post("/generate", response_model=GenerateResponse)
 async def generate(request: GenerateRequest):
     try:
-        response_text = generate_response(request.prompt)
+        response_text = genresp.generate_response(request.prompt)
         log_request_response(request.prompt, response_text)
         return GenerateResponse(response=response_text)
     except Exception as e:
+        logging.error(f"Error in /generate endpoint: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/status")
@@ -71,4 +74,5 @@ async def get_status():
             "system": system_info,
         }
     except Exception as e:
+        logging.error(f"Error in /status endpoint: {e}")
         raise HTTPException(status_code=500, detail=str(e))

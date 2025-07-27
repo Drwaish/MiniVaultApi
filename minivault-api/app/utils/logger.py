@@ -2,15 +2,16 @@ import logging
 import json
 from datetime import datetime
 
-# Configure the logger
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("logs/log.jsonl"),
-        logging.StreamHandler()
-    ]
-)
+def setup_logging():
+    # Configure the logger
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler("logs/log.jsonl"),
+            logging.StreamHandler()
+        ]
+    )
 
 def log_request_response(prompt: str, response: str):
     log_entry = {
